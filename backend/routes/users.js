@@ -17,4 +17,5 @@ var upload = multer({ storage: storage });
 
 router.post("/register",upload.single('image'),userController.register)
 
+
 module.exports = router;

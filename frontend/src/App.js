@@ -1,5 +1,5 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import ListUser from './components/listUsers'
+import ListUser from './components/listUser'
 import CreateUser from './components/createUser'
 import UpdateUser from './components/updateUser'
 function App() {
