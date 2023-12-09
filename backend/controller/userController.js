@@ -43,3 +43,31 @@ exports.register = asyncHandler(async (req, res) => {
         }
     
     })
+    exports.updateUser=asyncHandler(async(req,res)=>{
+        const { id } = req.params;
+        const { name, address, mobile, password } = req.body;
+        console.log(req.body);
+        try {
+            const user = await userModel.findById(id);
+            if (!user) {
+                return res.status(404).json({ message: 'User not found' });
+            }
+            user.name = name;
+            user.address = address;
+            user.mobile = mobile;
+           user.password = password;
+            if (req.file && req.file.path) {
+                const newImage = req.file.path.replace(/\\/g, '/');
+                user.image = newImage;
+            }
+            await user.save();
+    
+            console.log('User updated successfully');
+            console.log(user);
+            res.json({ message: 'User updated successfully' });
+        } catch (err) {
+            console.log(err);
+            res.status(500).json({ message: 'Error updating user' });
+        }
+        
+      })
