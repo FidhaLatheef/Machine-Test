@@ -19,33 +19,33 @@ function UserSignUp() {
 
   function isPasswordValid(password) {
     if (password.length < 8) {
-        return 'Password should be at least 8 characters long';
+      return 'Password should be at least 8 characters long';
     }
 
     if (!/\d/.test(password)) {
-        return 'Password should contain at least one numeric digit';
+      return 'Password should contain at least one numeric digit';
     }
 
     if (!/[!@#$%^&*]/.test(password)) {
-        return 'Password should contain at least one special character (!@#$%^&*)';
+      return 'Password should contain at least one special character (!@#$%^&*)';
     }
 
     return null;
-}
+  }
 
-const handleSubmit = (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
 
     if (name === '' || address === '' || password === '' || !image === '') {
-        setFieldRequired(true);
-        toast.error('Please enter all fields')
-        return;
+      setFieldRequired(true);
+      toast.error('Please enter all fields')
+      return;
     }
 
     const passwordError = isPasswordValid(password);
     if (passwordError) {
-        toast.error(passwordError);
-        return;
+      toast.error(passwordError);
+      return;
     }
 
     const formData = new FormData();
@@ -56,38 +56,38 @@ const handleSubmit = (e) => {
     formData.append("image", image);
 
     axios
-        .post('http://localhost:8000/users/register', formData, {
-            headers: {
-                'Content-Type': 'multipart/form-data',
-            },
-        }).then(function (response) {
-            dispatch(addUser(response.data))
-            navigate('/')
+      .post('http://localhost:8000/users/register', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      }).then(function (response) {
+        dispatch(addUser(response.data))
+        navigate('/')
 
-        })
-        .catch(function (error) {
-            console.log(error);
-            if (error.response && error.response.status === 400) {
-                setExist(true);
-                toast.error(error.response.data.exist)
-            } else {
-                console.log(error)
-                toast.error("An error occurred on the server")
-            }
-        });
-}
+      })
+      .catch(function (error) {
+        console.log(error);
+        if (error.response && error.response.status === 400) {
+          setExist(true);
+          toast.error(error.response.data.exist)
+        } else {
+          console.log(error)
+          toast.error("An error occurred on the server")
+        }
+      });
+  }
 
   return (
     <div>
       <Toaster />
       <section className="text-center text-lg-start">
         <div className="container py-4 d-flex justify-content-center align-items-center" style={{ minHeight: '100vh' }}>
-        <div
+          <div
             className="card cascading-right"
             style={{
               background: 'hsla(0, 0%, 100%, 0.55)',
               backdropFilter: 'blur(30px)',
-              maxWidth: '600px', 
+              maxWidth: '600px',
               width: '100%',
             }}
           >
