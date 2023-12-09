@@ -9,6 +9,11 @@ const userSlice=createSlice({
         addUser: (state, action) => {
             state.users.push(action.payload)
         },
+        getUser:(state,action)=>{
+            state.users=action.payload.map(user=>{
+                return{...user};
+            })
+        },
       
     }
 })

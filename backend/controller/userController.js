@@ -33,3 +33,13 @@ exports.register = asyncHandler(async (req, res) => {
             }
         }
     })
+    exports.userList = asyncHandler(async (req, res) => {
+        try {
+            let users = await userModel.find();
+            res.send(users)
+        } catch (error) {
+            console.log(error);
+            res.status(500).json({ message: 'error fetching users', error: error });
+        }
+    
+    })
