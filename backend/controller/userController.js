@@ -1,8 +1,8 @@
 var userModel = require('../model/userModel');
 var asyncHandler = require("express-async-handler")
+const bcrypt = require('bcrypt');
 
 exports.register = asyncHandler(async (req, res) => {
-    console.log('hii')
     const { name, address, password } = req.body;
     console.log(req.body)
     const imagePath = req.file.path;
@@ -55,7 +55,9 @@ exports.updateUser = asyncHandler(async (req, res) => {
         user.name = name;
         user.address = address;
         user.mobile = mobile;
-        user.password = password;
+        if (password) {
+            user.password = await bcrypt.hash(password, 10);
+        }
         if (req.file && req.file.path) {
             const newImage = req.file.path.replace(/\\/g, '/');
             user.image = newImage;

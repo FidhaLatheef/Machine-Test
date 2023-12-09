@@ -70,9 +70,9 @@ function ListUsers() {
                                         <td>{user.address}</td>
                                         <td>
                                             <div className="d-flex gap-2">
-                                            <Link to={`/update-user/${user._id}`} className='btn btn-warning'>Update</Link>
-                                            <button onClick={() => handleDelete(user._id)} className='btn btn-danger'>Delete</button>
-                                                
+                                                <Link to={`/update-user/${user._id}`} className='btn btn-warning'>Update</Link>
+                                                <button onClick={() => handleDelete(user._id)} className='btn btn-danger'>Delete</button>
+
                                             </div>
                                         </td>
 
